@@ -36,7 +36,7 @@ jobs:
       - name: Prepare Deploy
         run: |
           mkdir -p .deploy
-          cp .cr-index/index.yaml ./deploy/index.yaml
+          cp index.yaml ./deploy/index.yaml
           cp -r .cr-release-packages/* ./deploy/
 
       - name: Upload Pages artifact
