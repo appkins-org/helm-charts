@@ -11,6 +11,8 @@ jobs:
     # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
     permissions:
       contents: write
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,9 +33,13 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
+      - name: Prepare Deploy
+        run: |
+          mkdir -p .deploy
+          cp .cr-index/index.yaml ./deploy/index.yaml
+          cp -r .cr-release-packages/* ./deploy/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: |
-            .cr-release-packages
-            .cr-index/index.yaml
+          path: .deploy
