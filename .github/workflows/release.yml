@@ -33,13 +33,13 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Prepare Deploy
-        run: |
-          mkdir -p .deploy
-          cp index.yaml ./deploy/index.yaml
-          cp -r .cr-release-packages/* ./deploy/
+      # - name: Prepare Deploy
+      #   run: |
+      #     mkdir -p .deploy
+      #     cp index.yaml ./deploy/index.yaml
+      #     cp -r .cr-release-packages/* ./deploy/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: .deploy
+          path: .cr-release-packages
